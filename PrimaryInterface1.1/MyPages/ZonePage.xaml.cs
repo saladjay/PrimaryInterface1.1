@@ -24,5 +24,16 @@ namespace PrimaryInterface1._1.MyPages
         {
             InitializeComponent();
         }
+
+
+        private void SelectButton_Click(object sender, RoutedEventArgs e)
+        {
+            CellsDataGrid.activateCells();
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            CellsDataGrid.inactivateCells();
+        }
     }
 }

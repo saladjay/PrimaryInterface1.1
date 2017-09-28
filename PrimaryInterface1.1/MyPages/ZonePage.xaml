@@ -16,10 +16,10 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="1" Orientation="Vertical">
-            <Button Content="Select"/>
-            <Button Content="Clear"/>
+            <Button Content="Select" Click="SelectButton_Click"/>
+            <Button Content="Clear" Click="ClearButton_Click"/>
             <Button Content="Default"/>
         </StackPanel>
-        <UserControls:ZoneDataGrid HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
+        <UserControls:ZoneDataGrid x:Name="CellsDataGrid" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
     </Grid>
 </Page>
