@@ -1,23 +1,25 @@
-﻿<Page x:Class="PrimaryInterface1._1.MyPages.ZonePage"
+﻿<Page
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PrimaryInterface1._1.MyPages"
+      xmlns:UserControls="clr-namespace:PrimaryInterface1._1.Controls.UserControls" x:Class="PrimaryInterface1._1.MyPages.ZonePage"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="ZonePage">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="1" Orientation="Vertical">
-            <Button>Select</Button>
-            <Button>Clear</Button>
-            <Button>Default</Button>
+            <Button Content="Select"/>
+            <Button Content="Clear"/>
+            <Button Content="Default"/>
         </StackPanel>
+        <UserControls:ZoneDataGrid HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
     </Grid>
 </Page>

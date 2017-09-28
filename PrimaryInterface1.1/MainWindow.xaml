@@ -20,7 +20,8 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Button Tag="MyPages\DevicePage.xaml">Dante</Button>
+            <Button Tag="MyPages\ZonePage.xaml">Zone</Button>
         </StackPanel>
-        <Frame Grid.Row="1" x:Name="PageContext"></Frame>
+        <Frame Grid.Row="1" x:Name="PageContext" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 </Window>

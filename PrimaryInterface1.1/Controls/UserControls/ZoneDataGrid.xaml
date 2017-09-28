@@ -130,6 +130,6 @@
         <DataGrid  Style="{StaticResource DataGridStyle1}"  x:Name="CellsDataGrid" SelectionUnit="CellOrRowHeader" 
                            SelectionMode="Extended" EnableColumnVirtualization="False" EnableRowVirtualization="False"
                            CanUserResizeColumns="False" CanUserReorderColumns="False" CanUserResizeRows="False"    RowHeaderWidth="30"
-                           LoadingRow="testdatagrid_LoadingRow" ColumnHeaderHeight="80" />
+                           LoadingRow="testdatagrid_LoadingRow" ColumnHeaderHeight="80" AutoGenerateColumns="False"/>
     </Grid>
 </UserControl>

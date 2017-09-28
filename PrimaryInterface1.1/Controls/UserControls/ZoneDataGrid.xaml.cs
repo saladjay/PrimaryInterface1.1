@@ -47,6 +47,18 @@ namespace PrimaryInterface1._1.Controls.UserControls
             InitializeComponent();
             CellsDataGrid.SelectedCellsChanged += CellsDataGrid_SelectedCellsChanged;
             CellsDataGrid.BeginningEdit += CellsDataGrid_BeginningEdit;
+            ZoneInfo first = new ZoneInfo(6);
+            int[] abc = new int[5] { 0, 1, 2, 3, 4 };//every row must be different to the each row of the rest
+            ZoneInfo[] abcd = new ZoneInfo[5]
+            {
+                new ZoneInfo() {ZoneName="01" },
+                new ZoneInfo() {ZoneName="02" },
+                new ZoneInfo() {ZoneName="03" },
+                new ZoneInfo() {ZoneName="04" },
+                new ZoneInfo() {ZoneName="05" }
+            };
+            InitialDataGrid(first, CellsDataGrid);
+            CellsDataGrid.ItemsSource = abcd;
         }
 
         private void CellsDataGrid_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
@@ -163,6 +175,42 @@ namespace PrimaryInterface1._1.Controls.UserControls
                 }
             }
         }
+
+        public void InitialDataGrid(ZoneInfo First, DataGrid PrimaryDataGrid)
+        {
+            for (int i = 0; i < First.OutPutState.Count(); i++)
+            {
+                if (PrimaryDataGrid.Columns.Count == 0)
+                {
+                    DataGridTemplateColumn Column = new DataGridTemplateColumn()
+                    {
+                        Header = "Name",
+                        Width = 200,
+                    };
+                    DataTemplate TempCellTemplate = new DataTemplate();
+                    FrameworkElementFactory CellTextBox = new FrameworkElementFactory(typeof(TextBox));
+                    CellTextBox.SetBinding(TextBox.TextProperty, new Binding("ZoneName"));
+                    TempCellTemplate.VisualTree = CellTextBox;
+                    Column.CellTemplate = TempCellTemplate;
+                    PrimaryDataGrid.Columns.Add(Column);
+                }
+                else
+                {
+                    DataGridTemplateColumn Column = new DataGridTemplateColumn()
+                    {
+                        Header = string.Format("OutPut{0}", PrimaryDataGrid.Columns.Count),
+                        Width = 40,
+                        HeaderStyle = (Style)FindResource("DataGridColumnHeaderStyle1"),
+                    };
+                    DataTemplate TempCellTemplate = new DataTemplate();
+                    FrameworkElementFactory CellCLabel = new FrameworkElementFactory(typeof(CLabel));
+                    TempCellTemplate.VisualTree = CellCLabel;
+                    Column.CellTemplate = TempCellTemplate;
+                    PrimaryDataGrid.Columns.Add(Column);
+                }
+            }
+        }
+
     }
 
     public class CLabel : Control
@@ -221,6 +269,42 @@ namespace PrimaryInterface1._1.Controls.UserControls
             //if (e.LeftButton == MouseButtonState.Pressed)
             //    IsSelected = true;
             base.OnMouseEnter(e);
+        }
+    }
+
+
+    public class ZoneInfo : DependencyObject
+    {
+        public static readonly DependencyProperty ZoneNameProperty = DependencyProperty.Register("ZoneName", typeof(string), typeof(ZoneInfo));
+        public string ZoneName
+        {
+            get { return (string)GetValue(ZoneNameProperty); }
+            set { SetValue(ZoneNameProperty, value); }
+        }
+
+        private bool[] _OutPutState = null;
+        private static int _Count;
+        public bool[] OutPutState
+        {
+            get
+            {
+                if (_OutPutState == null)
+                    _OutPutState = new bool[_Count];
+                return _OutPutState;
+            }
+        }
+
+        public ZoneInfo()
+        {
+            if (_Count == 0)
+                return;
+            _OutPutState = new bool[_Count];
+        }
+
+        public ZoneInfo(int Length)
+        {
+            _Count = Length;
+            _OutPutState = new bool[_Count];
         }
     }
 
