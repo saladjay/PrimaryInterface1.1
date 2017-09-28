@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExtendedString">
+      <HintPath>..\..\..\..\Lib\ExtendedString\ExtendedString\bin\Debug\ExtendedString.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -55,6 +58,41 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\Core\AttachedPropertyScroller.cs" />
+    <Compile Include="Controls\UserControls\AttachTitleProperty.cs" />
+    <Compile Include="Controls\UserControls\ZoneDataGrid.xaml.cs">
+      <DependentUpon>ZoneDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Converter.cs" />
+    <Compile Include="Model\ZoneModel.cs" />
+    <Compile Include="MyPages\DevicePage.xaml.cs">
+      <DependentUpon>DevicePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyPages\ZonePage.xaml.cs">
+      <DependentUpon>ZonePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ViewModel1.cs" />
+    <Compile Include="ViewModel\ZoneViewModel.cs" />
+    <Page Include="Controls\Style\ConnectStateCell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Style\DeviceConnectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Style\DeviceList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Style\ToggleBtnCell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\UserControls\ZoneDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,12 +101,35 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\Core\CommonDependencyPropertyAttribute.cs" />
+    <Compile Include="Controls\Core\ConnectStateCell.cs" />
+    <Compile Include="Controls\Core\DeviceConnectView.cs" />
+    <Compile Include="Controls\Core\DeviceInterfaceGrid.cs" />
+    <Compile Include="Controls\Core\DeviceItemList.cs" />
+    <Compile Include="Controls\Core\ItemsSourceHelper.cs" />
+    <Compile Include="Controls\Core\ToggleBtnCell.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MyPages\DevicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyPages\ZonePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\CellState.cs" />
+    <Compile Include="Model\DelegateCommand.cs" />
+    <Compile Include="Model\DeviceModel.cs" />
+    <Compile Include="Model\NotificationObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -95,9 +156,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Page\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,28 @@ namespace PrimaryInterface1._1
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static readonly DependencyProperty OpenCommandProperty =
+            DependencyProperty.Register("OpenCommand", typeof(RoutedCommand), typeof(MainWindow), new PropertyMetadata(null));
+        public RoutedCommand OpenCommand
+        {
+            get { return (RoutedCommand)GetValue(OpenCommandProperty); }
+            set { SetValue(OpenCommandProperty, value); }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+            //bind command
+            this.OpenCommand = new RoutedCommand();
+            var bin = new CommandBinding(OpenCommand);
+            bin.Executed += Bin_Executed;
+            this.CommandBindings.Add(bin);
+        }
+
+        private void Bin_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var btn = e.Source as Button;
+            this.PageContext.Source = new Uri(btn.Tag.ToString(), UriKind.Relative);
         }
     }
 }

@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:PrimaryInterface1._1"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Controls\Style\ToggleBtnCell.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Controls\Style\ConnectStateCell.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Controls\Style\DeviceList.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Controls\Style\DeviceConnectView.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
