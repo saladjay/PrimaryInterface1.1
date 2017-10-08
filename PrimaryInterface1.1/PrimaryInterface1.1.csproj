@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\Core\AttachedPropertyScroller.cs" />
+    <Compile Include="Controls\Core\DragCanvas.cs" />
     <Compile Include="Controls\UserControls\AttachTitleProperty.cs" />
     <Compile Include="Controls\UserControls\ZoneDataGrid.xaml.cs">
       <DependentUpon>ZoneDataGrid.xaml</DependentUpon>
@@ -68,9 +69,16 @@
     <Compile Include="MyPages\DevicePage.xaml.cs">
       <DependentUpon>DevicePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyPages\MenuPage.xaml.cs">
+      <DependentUpon>MenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyPages\SettingPage.xaml.cs">
+      <DependentUpon>SettingPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MyPages\ZonePage.xaml.cs">
       <DependentUpon>ZonePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\ViewModel1.cs" />
     <Compile Include="ViewModel\ZoneViewModel.cs" />
     <Page Include="Controls\Style\ConnectStateCell.xaml">
@@ -113,6 +121,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MyPages\DevicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyPages\MenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MyPages\SettingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,27 @@
+﻿<Page x:Class="PrimaryInterface1._1.MyPages.MenuPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PrimaryInterface1._1.MyPages"
+      xmlns:Controls="clr-namespace:PrimaryInterface1._1.Controls"
+      xmlns:ViewModels="clr-namespace:PrimaryInterface1._1.ViewModel"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="MenuPage">
+
+    <Grid>
+        <Grid.DataContext>
+            <ViewModels:MenuViewModel></ViewModels:MenuViewModel>
+        </Grid.DataContext>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Command="{Binding CreateNewControl}" CommandParameter="{Binding ElementName=MyDragCanvas}">Create</Button>
+            <Button Command="{Binding RemoveOldControl}" CommandParameter="{Binding ElementName=MyDragCanvas}">Remove</Button>
+        </StackPanel>
+        <Controls:DragCanvas x:Name="MyDragCanvas" Grid.Row="1" CanvasItemsSource="{Binding ObjectList}"></Controls:DragCanvas>
+    </Grid>
+</Page>

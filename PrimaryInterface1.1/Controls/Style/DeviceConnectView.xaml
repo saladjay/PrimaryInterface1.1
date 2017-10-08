@@ -24,14 +24,14 @@
     <ControlTemplate x:Key="DeviceConnectViewTemplate" TargetType="local:DeviceConnectView">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="20"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="20"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <ScrollViewer Template="{StaticResource ScrollViewerControlTemplate1}" Grid.Column="2" Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" local:AttachedPropertyScroller.ScrollValue="{Binding ElementName=ABC,Path=HorizontalOffset}" Padding="{Binding ElementName=ABC,Path=ComputedVerticalScrollBarVisibility}">
