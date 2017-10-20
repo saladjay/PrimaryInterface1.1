@@ -10,6 +10,6 @@
       Title="DevicePage">
 
     <Grid>
-        <Controls:DeviceConnectView HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  x:Name="ConnectView"></Controls:DeviceConnectView>
+        <Controls:DeviceConnectView HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   x:Name="ConnectView"></Controls:DeviceConnectView>
     </Grid>
 </Page>

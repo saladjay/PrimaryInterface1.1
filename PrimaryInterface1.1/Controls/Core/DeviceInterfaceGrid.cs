@@ -1,4 +1,5 @@
-﻿using MS.Internal.PresentationFramework;
+﻿using ExtendedString;
+using MS.Internal.PresentationFramework;
 using PrimaryInterface1._1.Controls.Core;
 using PrimaryInterface1._1.Model;
 using PrimaryInterface1._1.ViewModel;
@@ -85,10 +86,12 @@ namespace PrimaryInterface1._1.Controls
                 ConstructionHelper = _DataSource.ConstructionHelper;
                 PositionHelper = _DataSource.PositionHelper;
                 ItemsSource = DataSource.DataCollection;
+                ConnectionState = DataSource.ConnectionState;
             }
         }
         private List<CellState> ColumnCellState { get; set; }
         private List<CellState> RowCellState { get; set; }
+        private SquareList<CellState> ConnectionState { get; set; }
         private List<object> ConstructionHelper { get; set; }
         private List<int> PositionHelper { get; set; }
         public List<DeviceModel> InnerDeviceList = new List<DeviceModel>();
@@ -220,6 +223,18 @@ namespace PrimaryInterface1._1.Controls
             DataSource.SelectRow = RowIndex;
         }
 
+        internal void CellConncet(bool IsConnect,Control Source)
+        {
+            int RowIndex = 0;
+            int ColumnIndex = 0;
+
+            RowIndex = ConstructionHelper.IndexOf(((ConnectStateCell)Source).ObjectTag1);
+            ColumnIndex = ConstructionHelper.IndexOf(((ConnectStateCell)Source).OBjectTag2);
+            DataSource.ConnectionCellPoint = new IntPoint(RowIndex, ColumnIndex);
+            //DataSource.ConnectedColumn = ColumnIndex;
+            //DataSource.ConnectedRow = RowIndex;
+        }
+
         public class CellFactory
         {
             public static Control CreateCell(object a, object b, int Row, int Column, DeviceInterfaceGrid temp)
@@ -268,11 +283,24 @@ namespace PrimaryInterface1._1.Controls
 
                     Binding B1 = new Binding("SingleBool") { Source = temp.RowCellState[Row] };
                     Binding B2 = new Binding("SingleBool") { Source = temp.ColumnCellState[Column] };
-                    MultiBinding MBinding = new MultiBinding() { Mode = BindingMode.OneWay };
-                    MBinding.Bindings.Add(B1);
-                    MBinding.Bindings.Add(B2);
-                    MBinding.Converter = Converter.CellVisibilityConverter;
-                    Good.SetBinding(ConnectStateCell.VisibilityProperty, MBinding);
+                    MultiBinding MBinding1 = new MultiBinding() { Mode = BindingMode.OneWay };
+                    MBinding1.Bindings.Add(B1);
+                    MBinding1.Bindings.Add(B2);
+                    MBinding1.Converter = Converter.CellVisibilityConverter;
+                    Good.SetBinding(ConnectStateCell.VisibilityProperty, MBinding1);
+
+                    //Binding B3 = new Binding("IsConnected") { Source = temp.RowCellState[Row] };
+                    //Binding B4 = new Binding("IsConnected") { Source = temp.ColumnCellState[Column] };
+                    //MultiBinding MBinding2 = new MultiBinding { Mode = BindingMode.TwoWay };
+                    //MBinding2.Bindings.Add(B3);
+                    //MBinding2.Bindings.Add(B4);
+                    //MBinding2.Converter = Converter.CellVisibilityConverter;
+                    //MBinding2.ConverterParameter = "Connected";
+                    //Good.SetBinding(ConnectStateCell.IsConnectedProperty, MBinding2);
+
+                    Good.SetBinding(ConnectStateCell.IsConnectedProperty, new Binding("IsConnected") { Source = temp.ConnectionState[Row, Column] });
+
+                    ((ConnectStateCell)Good).IsConnectedEvent += temp.CellConncet;
                 }
                 if (Good == null)
                     return Good;
@@ -292,7 +320,7 @@ namespace PrimaryInterface1._1.Controls
                     SelectMB.Converter = Converter.SelectConverter;
                     Good.SetBinding(ConnectStateCell.IsSelectedProperty, SelectMB);
 
-                    ((ConnectStateCell)Good).IsMouseSelect += temp.CellSelcect;
+                    ((ConnectStateCell)Good).IsMouseSelectEvent += temp.CellSelcect;
                 }
                 return (Control)Good;
             }

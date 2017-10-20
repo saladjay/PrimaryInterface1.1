@@ -65,9 +65,9 @@
                 </Grid.ColumnDefinitions>
                 <ToggleButton Name="Expander" Grid.Column="0" IsChecked="{Binding Open, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press" Width="20" Height="20" Style="{StaticResource ToggleBtnStyle}"></ToggleButton>
                 <Border Grid.Column="1" HorizontalAlignment="Stretch" BorderThickness="{TemplateBinding Border.BorderThickness}" Padding="{TemplateBinding Control.Padding}" BorderBrush="{TemplateBinding Border.BorderBrush}" Background="{TemplateBinding Panel.Background}" Name="Bd" SnapsToDevicePixels="True">
-                    <TextBlock Text="{TemplateBinding HeaderedContentControl.Header}" Name="PART_Header" TextAlignment="Left" HorizontalAlignment="Stretch" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" ></TextBlock>
+                    <TextBlock Text="{TemplateBinding Header}" Name="PART_Header" TextAlignment="Left" HorizontalAlignment="Stretch" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" ></TextBlock>
                 </Border>
-                <CheckBox Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Width="20" Height="20"></CheckBox>
+                <CheckBox Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Width="16" Height="16"></CheckBox>
                 <Rectangle Grid.ColumnSpan="3" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="Rt" IsHitTestVisible="False"></Rectangle>
             </Grid>
         </Grid>
@@ -113,10 +113,10 @@
                     <Border.LayoutTransform>
                         <ScaleTransform ScaleX="-1"></ScaleTransform>
                     </Border.LayoutTransform>
-                    <TextBlock Text="{TemplateBinding HeaderedContentControl.Header}" Name="PART_Header" TextAlignment="Right" HorizontalAlignment="Stretch" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" >
+                    <TextBlock Text="{TemplateBinding Header}" Name="PART_Header" TextAlignment="Right" HorizontalAlignment="Stretch" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" >
                     </TextBlock>
                 </Border>
-                <CheckBox Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Width="20" Height="20"></CheckBox>
+                <CheckBox Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Width="16" Height="16"></CheckBox>
                 <Rectangle Grid.ColumnSpan="3" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="Rt" IsHitTestVisible="False"></Rectangle>
             </Grid>
         </Grid>

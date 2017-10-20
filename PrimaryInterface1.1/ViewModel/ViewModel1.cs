@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static PrimaryInterface1._1.Model.DeviceModel;
+using ExtendedString;
+using System.Windows;
 
 namespace PrimaryInterface1._1.ViewModel
 {
@@ -44,6 +46,11 @@ namespace PrimaryInterface1._1.ViewModel
             get { return _RowCellState; }
         }
 
+        private SquareList<CellState> _ConnectionState = new SquareList<CellState>();
+        public SquareList<CellState> ConnectionState
+        {
+            get { return _ConnectionState; }
+        }
         private int _SelectRow = 0;
         public int SelectRow
         {
@@ -71,6 +78,66 @@ namespace PrimaryInterface1._1.ViewModel
                     _ColumnCellState[_SelectColumn].IsSelect = false;
                 _SelectColumn = value;
                 _ColumnCellState[_SelectColumn].IsSelect = true;
+            }
+        }
+
+        private Dictionary<int, int> RowDictionary = new Dictionary<int, int>();
+        private Dictionary<int, int> ColumnDicitionary = new Dictionary<int, int>();
+
+        private IntPoint _ConnectionCellPoint;
+        public IntPoint ConnectionCellPoint
+        {
+            get { return _ConnectionCellPoint; }
+            set
+            {
+                //if (_ConnectionCellPoint != null&&(_ConnectionCellPoint.X == value.X || _ConnectionCellPoint.Y == value.Y))
+                //    _ConnectionState[_ConnectionCellPoint.X, _ConnectionCellPoint.Y].IsConnected = !_ConnectionState[_ConnectionCellPoint.X, _ConnectionCellPoint.Y].IsConnected;
+                //_ConnectionCellPoint = value;
+                //_ConnectionState[value.X, value.Y].IsConnected = true;
+                int TempColumn, TempRow;
+                bool A = RowDictionary.TryGetValue(value.X,out TempColumn);
+                bool B = ColumnDicitionary.TryGetValue(value.Y, out TempRow);
+                if (A && B)
+                {
+                    if (TempRow == value.X&&TempColumn==value.Y)
+                    {
+                        RowDictionary.Remove(value.X);
+                        ColumnDicitionary.Remove(value.Y);
+                        _ConnectionState[value.X, value.Y].IsConnected = false;
+                    }
+                    else
+                    {
+                        RowDictionary[value.X] = value.Y;
+                        ColumnDicitionary[value.Y] = value.X;
+                        RowDictionary.Remove(TempRow);
+                        ColumnDicitionary.Remove(TempColumn);
+                        _ConnectionState[value.X, TempColumn].IsConnected = false;
+                        _ConnectionState[TempRow, value.Y].IsConnected = false;
+                        _ConnectionState[value.X, value.Y].IsConnected = true;
+                    }
+                }
+                if (A && !B)
+                {
+                    RowDictionary[value.X] = value.Y;
+                    ColumnDicitionary.Remove(TempColumn);
+                    ColumnDicitionary.Add(value.Y, value.X);
+                    _ConnectionState[value.X, TempColumn].IsConnected = false;
+                    _ConnectionState[value.X, value.Y].IsConnected = true;
+                }
+                if (!A && B)
+                {
+                    ColumnDicitionary[value.Y] = value.X;
+                    RowDictionary.Remove(TempRow);
+                    RowDictionary.Add(value.X, value.Y);
+                    _ConnectionState[TempRow, value.Y].IsConnected = false;
+                    _ConnectionState[value.X, value.Y].IsConnected = true;
+                }
+                if(!A&&!B)
+                {
+                    ColumnDicitionary.Add(value.Y, value.X);
+                    RowDictionary.Add(value.X, value.Y);
+                    _ConnectionState[value.X, value.Y].IsConnected = true;
+                }
             }
         }
 
@@ -102,6 +169,7 @@ namespace PrimaryInterface1._1.ViewModel
                     {
                         _ColumnCellState.Add(new Model.CellState() { RowState = false, ColumnState = false });
                         _RowCellState.Add(new Model.CellState() { RowState = false, ColumnState = false });
+                        _ConnectionState.Add(new CellState());
                         PositionHelper.Add(PositionHelperIndex++);
                     }
                 }
@@ -122,6 +190,7 @@ namespace PrimaryInterface1._1.ViewModel
                         _ConstructionHelper.RemoveAt(RemoveIndex);
                         _PositionHelper.RemoveAt(RemoveIndex);
                     }
+                    _ConnectionState.RemoveAtRange(RemoveIndex, device.InterfaceCount + 1);
                     _InnerDeviceList.RemoveAt(Index);
                 }
             }

@@ -65,19 +65,32 @@ namespace PrimaryInterface1._1.Controls
             set { SetValue(IsCommonProperty, value); }
         }
 
-        public delegate void IsMouseOverHandler(bool IsMouseSelect, ConnectStateCell Source);
-        public event IsMouseOverHandler IsMouseSelect;
+        public static readonly DependencyProperty IsConnectedProperty = DependencyProperty.RegisterAttached("IsConnected", typeof(bool), typeof(ConnectStateCell),new PropertyMetadata(false));
+        public bool IsConnected
+        {
+            get { return (bool)GetValue(IsConnectedProperty); }
+            set { SetValue(IsConnectedProperty, value); }
+        }
 
+        public delegate void MouseActionHandler(bool IsMouseSelect, ConnectStateCell Source);
+        public event MouseActionHandler IsMouseSelectEvent;
+        public event MouseActionHandler IsConnectedEvent;
         protected override void OnMouseEnter(MouseEventArgs e)
         {
-            IsMouseSelect?.Invoke(true, this);
+            IsMouseSelectEvent?.Invoke(true, this);
             base.OnMouseEnter(e);
         }
 
         protected override void OnMouseLeave(MouseEventArgs e)
         {
-            IsMouseSelect?.Invoke(false, this);
+            IsMouseSelectEvent?.Invoke(false, this);
             base.OnMouseLeave(e);
+        }
+
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            IsConnectedEvent?.Invoke(true, this);
+            base.OnMouseDown(e);
         }
 
         public object ObjectTag1 { get; set; }

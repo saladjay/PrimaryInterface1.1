@@ -65,16 +65,23 @@ namespace PrimaryInterface1._1.Model
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            //Debug.WriteLine("VisibilityConvetter");
-            if ((bool)values[0] && (bool)values[1])
+            if (parameter == null)
             {
-                //Debug.WriteLine("VisibilityConverter return visible");
-                return Visibility.Visible;
+                //Debug.WriteLine("VisibilityConvetter");
+                if ((bool)values[0] && (bool)values[1])
+                {
+                    //Debug.WriteLine("VisibilityConverter return visible");
+                    return Visibility.Visible;
+                }
+                else
+                {
+                    //Debug.WriteLine("VisibilityConverter return collapsed");
+                    return Visibility.Collapsed;
+                }
             }
             else
             {
-                //Debug.WriteLine("VisibilityConverter return collapsed");
-                return Visibility.Collapsed;
+                return ((bool)values[0] && (bool)values[1]);
             }
         }
 

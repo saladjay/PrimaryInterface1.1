@@ -202,7 +202,7 @@ namespace PrimaryInterface1._1.Controls
         }
     }
 
-    public class CTreeViewItem : TreeViewItem
+    public class CTreeViewItem : Control
     {
         static CTreeViewItem()
         {
@@ -222,6 +222,15 @@ namespace PrimaryInterface1._1.Controls
         {
             get { return (bool)GetValue(HideBtnProperty); }
             set { SetValue(HideBtnProperty, value); }
+        }
+        #endregion
+
+        #region Header
+        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register("Header", typeof(string), typeof(CTreeViewItem));
+        public string Header
+        {
+            get { return (string)GetValue(HeaderProperty); }
+            set { SetValue(HeaderProperty, value); }
         }
         #endregion
 

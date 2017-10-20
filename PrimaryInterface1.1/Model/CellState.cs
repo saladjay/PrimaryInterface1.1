@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,6 +50,17 @@ namespace PrimaryInterface1._1.Model
             {
                 isseclect = value;
                 this.RaisePropertyChanged("IsSelect");
+            }
+        }
+
+        private bool _IsConnected;
+        public bool IsConnected
+        {
+            get { return _IsConnected; }
+            set
+            {
+                _IsConnected = value;
+                this.RaisePropertyChanged("IsConnected");
             }
         }
     }

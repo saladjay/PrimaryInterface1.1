@@ -1,4 +1,5 @@
-﻿using PrimaryInterface1._1.ViewModel;
+﻿using PrimaryInterface1._1.Controls.Core;
+using PrimaryInterface1._1.ViewModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -52,6 +53,7 @@ namespace PrimaryInterface1._1.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DeviceConnectView), new FrameworkPropertyMetadata(typeof(DeviceConnectView)));
         }
+
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(DeviceConnectView));
 
         public string Title
@@ -81,9 +83,9 @@ namespace PrimaryInterface1._1.Controls
             get { return (object)GetValue(ButtomItemPropertyKey.DependencyProperty); }
         }
 
-        private DeviceItemList LeftTreeView { get; set; }
-        private DeviceItemList TopTreeView { get; set; }
-        private DeviceInterfaceGrid InterfaceState { get; set; }
+        public DeviceItemList LeftTreeView { get; set; }
+        public DeviceItemList TopTreeView { get; set; }
+        public DeviceInterfaceGrid InterfaceState { get; set; }
         private ViewModel1 _DataSource = null;
         public ViewModel1 DataSource
         {
@@ -100,21 +102,22 @@ namespace PrimaryInterface1._1.Controls
             LeftTreeView = new DeviceItemList() { DockDirection = _Direction.Left };
             TopTreeView = new DeviceItemList() { DockDirection = _Direction.Top };
             InterfaceState = new DeviceInterfaceGrid();
+            //TopItem = TopTreeView;
+            //LeftItem = LeftTreeView;
+            //ButtomItem = InterfaceState;
             this.SetValue(LeftItemPropertyKey, LeftTreeView);
             this.SetValue(TopItemPropertyKey, TopTreeView);
             this.SetValue(ButtomItemPropertyKey, InterfaceState);
         }
 
-        //protected override void OnInitialized(EventArgs e)
-        //{
-        //    base.OnInitialized(e);
-
-        //}
-
-
         protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
         {
             InterfaceState.DataSource = LeftTreeView.DataSource = TopTreeView.DataSource = DataSource;
+        }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
         }
     }
 }

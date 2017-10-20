@@ -10,6 +10,9 @@
             <Trigger Property="IsCommon" Value="True">
                 <Setter Property="Fill" Value="#7F00FFFF" TargetName="Background"></Setter>
             </Trigger>
+            <Trigger Property="IsConnected" Value="True">
+                <Setter Property="Fill" TargetName="Background" Value="#FF00FF00"></Setter>
+            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
