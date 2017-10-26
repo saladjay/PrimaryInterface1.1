@@ -64,6 +64,7 @@ namespace PrimaryInterface1._1.Controls.UserControls
         private void CellsDataGrid_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
         {
             e.Cancel = true;
+            return;
             DataGrid tempDatagrid = sender as DataGrid;
             DataGridRow temprow = e.Row;
             DataGridColumn tempcolumn = e.Column;

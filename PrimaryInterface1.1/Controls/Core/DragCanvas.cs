@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,6 +54,7 @@ namespace PrimaryInterface1._1.Controls
         private UIElement _originalElement;
         private double _originalLeft;
         private double _originalTop;
+        private double _elementWidth, _elementHeight;
         private SimpleCircleAdorner _overlayElement;
         private Point _startPoint;
         private ObservableCollection<UIElement> _ItemsSource = null;
@@ -109,8 +111,15 @@ namespace PrimaryInterface1._1.Controls
 
                 if (cancelled == false)
                 {
-                    Canvas.SetTop(_originalElement, _originalTop + _overlayElement.TopOffset);
-                    Canvas.SetLeft(_originalElement, _originalLeft + _overlayElement.LeftOffset);
+                    double XOffset = _originalLeft + _overlayElement.LeftOffset;
+                    double YOffset = _originalTop + _overlayElement.TopOffset;
+                    XOffset = XOffset > 0 ? XOffset : 0;
+                    XOffset = XOffset < this.ActualWidth-_elementWidth ? XOffset : this.ActualWidth - _elementWidth;
+                    YOffset = YOffset > 0 ? YOffset : 0;
+                    YOffset = YOffset < this.ActualHeight-_elementHeight ? YOffset : this.ActualHeight - _elementHeight;
+                    Canvas.SetTop(_originalElement, YOffset);
+                    Canvas.SetLeft(_originalElement, XOffset);
+                    Debug.WriteLine("Y :" + (YOffset) + "  X :" + (XOffset));
                 }
                 _overlayElement = null;
             }
@@ -156,10 +165,7 @@ namespace PrimaryInterface1._1.Controls
 
             double _LeftOffset = currentPosition.X - _startPoint.X;
             double _TopOffset = currentPosition.Y - _startPoint.Y;
-            //_LeftOffset = _LeftOffset < 0 ? 0 : _LeftOffset;
-            //_LeftOffset = _LeftOffset > _myCanvas.ActualWidth ? _myCanvas.ActualWidth : _LeftOffset;
-            //_TopOffset = _TopOffset < 0 ? 0 : _TopOffset;
-            //_TopOffset = _TopOffset > _myCanvas.ActualHeight ? _myCanvas.ActualHeight : _TopOffset;
+
             _overlayElement.LeftOffset = _LeftOffset;
             _overlayElement.TopOffset = _TopOffset;
         }
@@ -174,6 +180,15 @@ namespace PrimaryInterface1._1.Controls
                 _isDown = true;
                 _startPoint = e.GetPosition(this);
                 _originalElement = e.Source as UIElement;
+                if(_originalElement is FrameworkElement)
+                {
+                    _elementHeight = ((FrameworkElement)_originalElement).ActualHeight;
+                    _elementWidth = ((FrameworkElement)_originalElement).ActualWidth;
+                }
+                else
+                {
+                    _elementWidth = _elementHeight = 0;
+                }
                 this.CaptureMouse();
                 e.Handled = true;
             }

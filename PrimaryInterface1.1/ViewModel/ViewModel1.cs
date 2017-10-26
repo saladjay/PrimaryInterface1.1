@@ -90,10 +90,6 @@ namespace PrimaryInterface1._1.ViewModel
             get { return _ConnectionCellPoint; }
             set
             {
-                //if (_ConnectionCellPoint != null&&(_ConnectionCellPoint.X == value.X || _ConnectionCellPoint.Y == value.Y))
-                //    _ConnectionState[_ConnectionCellPoint.X, _ConnectionCellPoint.Y].IsConnected = !_ConnectionState[_ConnectionCellPoint.X, _ConnectionCellPoint.Y].IsConnected;
-                //_ConnectionCellPoint = value;
-                //_ConnectionState[value.X, value.Y].IsConnected = true;
                 int TempColumn, TempRow;
                 bool A = RowDictionary.TryGetValue(value.X,out TempColumn);
                 bool B = ColumnDicitionary.TryGetValue(value.Y, out TempRow);
